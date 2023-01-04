@@ -22,9 +22,9 @@ public class UserController {
     }
 
     @GetMapping
-    public String userPage(Model model, @AuthenticationPrincipal User user) {
-        isAdmin = user.getRoles().stream().anyMatch(x -> x.getName().equals("ROLE_ADMIN"));
-        model.addAttribute("user", user);
+    public String userPage(Model model, @AuthenticationPrincipal User currentUser) {
+        isAdmin = currentUser.getRoles().stream().anyMatch(x -> x.getName().equals("ROLE_ADMIN"));
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("isAdmin", isAdmin);
         return "user";
     }

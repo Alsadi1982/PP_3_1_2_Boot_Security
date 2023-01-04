@@ -24,6 +24,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return '\'' + name + '\'';
+        String[] strs = name.split("_");
+        return strs[1];
     }
 }

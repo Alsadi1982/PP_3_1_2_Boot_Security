@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService{
         updateableUser.setLastName(user.getLastName());
         updateableUser.setEmail(user.getEmail());
         updateableUser.setAge(user.getAge());
+        updateableUser.setUsername(user.getUsername());
         updateableUser.setRoles(user.getRoles());
     }
     @Transactional
