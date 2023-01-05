@@ -55,10 +55,6 @@
             </div>
             <p>
                 <label>Роли:
-<!--                    <select class="form-control" id="roles" th:field="*{roles}">-->
-<!--                        <option value="0">select role</option>-->
-<!--                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>-->
-<!--                    </select>-->
                                         <input th:type="checkbox" name="roles"
                                                th:each="role : ${roles}"
                                                th:text="${role.name}"

@@ -85,7 +85,6 @@
                                                     <p>
                                                     <label for="roles1">Role</label>
                                                     <select class="form-control" id="roles1" name="roles1" th:value="${user.roles}">
-                                                        <option value="0">select role</option>
                                                         <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
                                                     </select>
                                                     </p>
