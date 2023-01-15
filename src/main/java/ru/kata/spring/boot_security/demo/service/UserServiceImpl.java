@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void editUser(User user, Long id) {
+    public User editUser(User user, Long id) {
         User updateableUser = findUserById(id);
         updateableUser.setFirstName(user.getFirstName());
         updateableUser.setLastName(user.getLastName());
@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService{
         updateableUser.setAge(user.getAge());
         updateableUser.setUsername(user.getUsername());
         updateableUser.setRoles(user.getRoles());
+        return updateableUser;
     }
     @Transactional
     public User findByUserName(String username) {

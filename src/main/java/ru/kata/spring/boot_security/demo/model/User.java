@@ -17,6 +17,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Getter
 @Setter
 @Validated

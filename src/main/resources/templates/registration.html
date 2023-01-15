@@ -19,7 +19,7 @@
             <h2 class="form-signin-heading my-3">Форма регистрации</h2>
             <input type="text" th:field="*{firstName}"  class="form-control" placeholder="Имя" required="" autofocus=""><br>
             <input type="text" th:field="*{lastName}"  class="form-control" placeholder="Фамилия" required="" autofocus=""><br>
-            <input type="text" th:field="*{email}"  class="form-control" placeholder="Email" required="" autofocus=""><br>
+            <input type="email" th:field="*{email}"  class="form-control" placeholder="Email" required="" autofocus=""><br>
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             <input type="number" th:field="*{age}"  class="form-control" placeholder="Возраст" required="" autofocus=""><br>
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>

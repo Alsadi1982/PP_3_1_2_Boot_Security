@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -58,13 +59,21 @@ public class FirstRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping(value="{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") Long id) {
+    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> updateUser(@RequestBody @Valid User user, @PathVariable("id") Long id) {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        User updateableUser = userService.editUser(user, id);
+        return new ResponseEntity<>(updateableUser, HttpStatus.OK);
+    }
 
-        userService.editUser(user, id);
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        userService.addUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
