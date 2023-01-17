@@ -1,5 +1,5 @@
 async function getAllUsers() {
-    const response = await fetch('http://localhost:7777/api/v1/users');
+    const response = await fetch('http://localhost:7777/admin/api/v1/users');
     const users = await response.json();
 
     users.forEach(user => printAllUsers(user));
@@ -7,7 +7,7 @@ async function getAllUsers() {
 }
 
 async function getAllRoles() {
-    const response = await fetch('http://localhost:7777/api/v1/users/roles');
+    const response = await fetch('http://localhost:7777/admin/api/v1/users/roles');
     const roles = await response.json();
 
     jQuery('option').remove();
@@ -16,7 +16,7 @@ async function getAllRoles() {
 }
 
 async function deleteUser(id) {
-    const response = await fetch(`http://localhost:7777/api/v1/users/${id}`,
+    const response = await fetch(`http://localhost:7777/admin/api/v1/users/${id}`,
         {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
@@ -28,7 +28,8 @@ async function deleteUser(id) {
     }
 }
 
-document.getElementById('addNewUserBtn').addEventListener('click', async () => {
+document.getElementById('addNewUserBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
     const firstName = jQuery(`#newFirstName`).val();
     const lastName = jQuery(`#newLastName`).val();
     const email = jQuery(`#newEmail`).val();
@@ -45,7 +46,7 @@ document.getElementById('addNewUserBtn').addEventListener('click', async () => {
 
     let roles = [rolesNew];
 
-    const response = await fetch(`http://localhost:7777/api/v1/users`,
+    const response = await fetch(`http://localhost:7777/admin/api/v1/users`,
         {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -55,9 +56,8 @@ document.getElementById('addNewUserBtn').addEventListener('click', async () => {
     const result = await response.json();
     printAllUsers(result);
     await getAllRoles();
-    jQuery('form')[0].reset();
+    jQuery('#newUserForm')[0].reset();
     jQuery('#action li:first-child a').tab('show');
-
 
 });
 
@@ -77,7 +77,7 @@ async function updateUser(id) {
 
     let roles = [rolesNew];
 
-    const response = await fetch(`http://localhost:7777/api/v1/users/${id}`,
+    const response = await fetch(`http://localhost:7777/admin/api/v1/users/${id}`,
         {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
