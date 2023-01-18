@@ -19,13 +19,20 @@ import java.util.stream.Stream;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostConstruct
     private void initBD() {
@@ -42,12 +49,6 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public List<User> getListOfUsers() {
@@ -88,6 +89,7 @@ public class UserServiceImpl implements UserService{
         updateableUser.setRoles(user.getRoles());
         return updateableUser;
     }
+
     @Transactional
     public User findByUserName(String username) {
         return userRepository.findByUsername(username);
